@@ -31,7 +31,8 @@ class App {
    * состояние 'init'
    * */
   static initUser() {
-    User.fetch(() => this.setState(User.current() ? "user-logged" : "init"));
+    let stat1 = User.current() ? "user-logged" : "init";
+    User.fetch(() => this.setState(stat1));
   }
 
   /**
@@ -156,7 +157,7 @@ class App {
     this.element.classList.add(`app_${state}`);
     this.state = state;
 
-    if (state === "user-logged") {
+    if (state === "user-logged") { 
       this.update();
     }
     if (state === "init") {

@@ -4,12 +4,15 @@
  * Имеет свойство URL, равное '/user'.
  * */
 class User {
+
+static url = '/user';
+
   /**
    * Устанавливает текущего пользователя в
    * локальном хранилище.
    * */
   static setCurrent(user) {
-
+      localStorage.setItem('user', JSON.stringify(user));
   }
 
   /**
@@ -17,7 +20,7 @@ class User {
    * пользователе из локального хранилища.
    * */
   static unsetCurrent() {
-
+      localStorage.removeItem('user');
   }
 
   /**
@@ -25,7 +28,11 @@ class User {
    * из локального хранилища
    * */
   static current() {
-
+    try {
+      return JSON.parse(localStorage.getItem('user'));
+    } catch {
+      return;
+    }
   }
 
   /**
@@ -33,7 +40,20 @@ class User {
    * авторизованном пользователе.
    * */
   static fetch(callback) {
-
+    let opt = {url: this.url + '/current', method: 'GET',
+        callback: (err, res) => {
+//          console.log("fetch  ", res);
+          if (res && res.user) {
+              this.setCurrent(res.user);
+          }
+          if (!res.succes) {
+              this.unsetCurrent();
+          }
+//          console.log(callback);
+          callback(err, res);
+        }
+    };
+    createRequest(opt);
   }
 
   /**
@@ -42,20 +62,21 @@ class User {
    * сохранить пользователя через метод
    * User.setCurrent.
    * */
+  
   static login(data, callback) {
-    createRequest({
-      url: this.URL + '/login',
-      method: 'POST',
-      responseType: 'json',
-      data,
-      callback: (err, response) => {
-        if (response && response.user) {
-          this.setCurrent(response.user);
+//    console.log('login  data = ', data);
+    let opt = { url: this.url + '/login', method: 'POST', data: data,
+        callback: (err, res) => {
+          if (res && res.user) {
+            this.setCurrent(res.user);
+          }
+          callback(err, res);
         }
-        callback(err, response);
-      }
-    });
+    };
+//    console.log('login  opt = ', opt);
+    createRequest(opt);
   }
+
 
   /**
    * Производит попытку регистрации пользователя.
@@ -64,7 +85,15 @@ class User {
    * User.setCurrent.
    * */
   static register(data, callback) {
-
+    let opt = {url: this.url + '/register', method: 'POST', data,
+      callback: (err, res) => {
+          if (res && res.user) {
+              this.setCurrent(res.user);
+          }
+          callback(err, res);
+      }
+    };
+    createRequest(opt);
   }
 
   /**
@@ -72,6 +101,16 @@ class User {
    * выхода необходимо вызвать метод User.unsetCurrent
    * */
   static logout(callback) {
-
+    let data = {};
+    let opt = {url: this.url + '/logout', method: 'POST', data,
+        callback: (err, res) => {
+          if (res && res.success) {
+              this.unsetCurrent();
+          }
+          callback(err, res);
+//          console.log("logout  ", err, res);
+      }
+    };
+    createRequest(opt);
   }
 }
