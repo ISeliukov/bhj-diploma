@@ -14,8 +14,7 @@ static url = '/account';
    * Получает информацию о счёте
    * */
   static get(id = '', callback) {
-    let opt = {url: this.url + '/' + id, method: 'GET', callback};
-    createRequest(opt);
+    createRequest({url: this.url + '/' + id, method: 'GET', callback});
   }
 
 }

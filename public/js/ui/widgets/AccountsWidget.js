@@ -104,11 +104,11 @@ class AccountsWidget {
    * item - объект с данными о счёте
    * */
   getAccountHTML(item) {
-    let code = '<li class= "account" data-id='+item.id+'>'+
-               '<a href="#">'+
-               '<span>'+item.name+'</span> /'+
-               '<span>'+item.sum+'</span>'+
-               '</a></li>';
+    let code = `<li class= "account" data-id=${item.id}>
+<a href="#">
+<span>${item.name}</span> /
+<span>${item.sum}</span>
+</a></li>`;
 
     return code;
     

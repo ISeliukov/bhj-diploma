@@ -12,8 +12,7 @@ class Entity {
   static url = "";
 
   static list(data, callback) {
-    let opt = { url: this.url, data, method: 'GET', callback };
-    createRequest(opt);
+    createRequest({ url: this.url, data, method: 'GET', callback });
   }
 
   /**
@@ -23,8 +22,7 @@ class Entity {
    * */
 
   static create(data, callback) {
-    let opt = { url: this.url, data, method: 'PUT', callback };
-    createRequest(opt);
+    createRequest({ url: this.url, data, method: 'PUT', callback });
   }
 
   /**
@@ -33,7 +31,6 @@ class Entity {
    * */
 
   static remove(data, callback) {
-    let opt = { url: this.url, data, method: 'DELETE', callback };
-    createRequest(opt);
+    createRequest({ url: this.url, data, method: 'DELETE', callback });
   }  
 }

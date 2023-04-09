@@ -48,11 +48,6 @@
       "id": "3"
     },
     {
-      "name": "Счет 1",
-      "user_id": "9h6e9swlfp54q8m",
-      "id": "9h6e51glfv6jbap"
-    },
-    {
       "name": "Кошель",
       "user_id": "9h6e9swlfp54q8m",
       "id": "9h6e4zslfz6be9i"
@@ -61,6 +56,11 @@
       "name": "Счет Васи",
       "user_id": "9h6e154lfs7g5md",
       "id": "9h6eegolfz9xnlq"
+    },
+    {
+      "name": "Заначка",
+      "user_id": "9h6e9swlfp54q8m",
+      "id": "9h6e8i8lg9fuu2o"
     }
   ],
   "transactions": [
@@ -200,33 +200,6 @@
       "user_id": "1"
     },
     {
-      "id": "9h6eegolfz6l42r",
-      "type": "income",
-      "name": "ООО \"ГРАНТЭК-ЭЛ\"",
-      "sum": 100000,
-      "account_id": "9h6e51glfv6jbap",
-      "user_id": "9h6e9swlfp54q8m",
-      "created_at": "2023-04-02T09:09:19.970Z"
-    },
-    {
-      "id": "9h6eagslfz73dfe",
-      "type": "expense",
-      "name": "ООО \"КЕХ ЕКОММЕРЦ\"",
-      "sum": 111,
-      "account_id": "9h6e51glfv6jbap",
-      "user_id": "9h6e9swlfp54q8m",
-      "created_at": "2023-04-02T09:23:31.897Z"
-    },
-    {
-      "id": "9h6ed0olfz73rd2",
-      "type": "expense",
-      "name": "zxc",
-      "sum": 111,
-      "account_id": "9h6e51glfv6jbap",
-      "user_id": "9h6e9swlfp54q8m",
-      "created_at": "2023-04-02T09:23:49.957Z"
-    },
-    {
       "id": "9h6eek0lfz74hoh",
       "type": "income",
       "name": "Клад",
@@ -243,6 +216,42 @@
       "account_id": "9h6eegolfz9xnlq",
       "user_id": "9h6e154lfs7g5md",
       "created_at": "2023-04-02T10:43:18.055Z"
+    },
+    {
+      "id": "9h6e8g0lg9f1x6p",
+      "type": "income",
+      "name": "Клад",
+      "sum": 4444,
+      "account_id": "9h6e4zslfz6be9i",
+      "user_id": "9h6e9swlfp54q8m",
+      "created_at": "2023-04-09T13:04:02.880Z"
+    },
+    {
+      "id": "9h6ecl4lg9f24mp",
+      "type": "expense",
+      "name": "Пивко",
+      "sum": 3333,
+      "account_id": "9h6e4zslfz6be9i",
+      "user_id": "9h6e9swlfp54q8m",
+      "created_at": "2023-04-09T13:04:12.528Z"
+    },
+    {
+      "id": "9h6e59clg9ftkiu",
+      "type": "expense",
+      "name": "Потерял",
+      "sum": 100,
+      "account_id": "9h6e4zslfz6be9i",
+      "user_id": "9h6e9swlfp54q8m",
+      "created_at": "2023-04-09T13:25:32.837Z"
+    },
+    {
+      "id": "9h6ec0wlg9fv9he",
+      "type": "income",
+      "name": "Заначил",
+      "sum": 777777777,
+      "account_id": "9h6e8i8lg9fuu2o",
+      "user_id": "9h6e9swlfp54q8m",
+      "created_at": "2023-04-09T13:26:51.841Z"
     }
   ]
 }

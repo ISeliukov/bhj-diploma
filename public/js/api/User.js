@@ -28,11 +28,7 @@ static url = '/user';
    * из локального хранилища
    * */
   static current() {
-    try {
-      return JSON.parse(localStorage.getItem('user'));
-    } catch {
-      return;
-    }
+    return JSON.parse(localStorage.getItem('user'));
   }
 
   /**
@@ -40,20 +36,17 @@ static url = '/user';
    * авторизованном пользователе.
    * */
   static fetch(callback) {
-    let opt = {url: this.url + '/current', method: 'GET',
-        callback: (err, res) => {
-//          console.log("fetch  ", res);
-          if (res && res.user) {
-              this.setCurrent(res.user);
-          }
-          if (!res.succes) {
-              this.unsetCurrent();
-          }
-//          console.log(callback);
-          callback(err, res);
-        }
-    };
-    createRequest(opt);
+    createRequest({url: this.url + '/current', method: 'GET',
+    callback: (err, res) => {
+      if (res && res.user) {
+          this.setCurrent(res.user);
+      }
+      if (!res.succes) {
+          this.unsetCurrent();
+      }
+      callback(err, res);
+    }
+    });
   }
 
   /**
@@ -64,17 +57,14 @@ static url = '/user';
    * */
   
   static login(data, callback) {
-//    console.log('login  data = ', data);
-    let opt = { url: this.url + '/login', method: 'POST', data: data,
-        callback: (err, res) => {
-          if (res && res.user) {
-            this.setCurrent(res.user);
-          }
-          callback(err, res);
-        }
-    };
-//    console.log('login  opt = ', opt);
-    createRequest(opt);
+    createRequest({ url: this.url + '/login', method: 'POST', data: data,
+    callback: (err, res) => {
+      if (res && res.user) {
+        this.setCurrent(res.user);
+      }
+      callback(err, res);
+    }
+    });
   }
 
 
@@ -85,15 +75,14 @@ static url = '/user';
    * User.setCurrent.
    * */
   static register(data, callback) {
-    let opt = {url: this.url + '/register', method: 'POST', data,
-      callback: (err, res) => {
-          if (res && res.user) {
-              this.setCurrent(res.user);
-          }
-          callback(err, res);
-      }
-    };
-    createRequest(opt);
+    createRequest({url: this.url + '/register', method: 'POST', data,
+    callback: (err, res) => {
+        if (res && res.user) {
+            this.setCurrent(res.user);
+        }
+        callback(err, res);
+    }
+    });
   }
 
   /**
@@ -102,15 +91,13 @@ static url = '/user';
    * */
   static logout(callback) {
     let data = {};
-    let opt = {url: this.url + '/logout', method: 'POST', data,
-        callback: (err, res) => {
-          if (res && res.success) {
-              this.unsetCurrent();
-          }
-          callback(err, res);
-//          console.log("logout  ", err, res);
+    createRequest({url: this.url + '/logout', method: 'POST', data,
+    callback: (err, res) => {
+      if (res && res.success) {
+          this.unsetCurrent();
       }
-    };
-    createRequest(opt);
+      callback(err, res);
+    }
+    });
   }
 }

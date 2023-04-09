@@ -22,11 +22,7 @@ class TransactionsPage {
    * Вызывает метод render для отрисовки страницы
    * */
   update() {
-    try {
-      this.render(this.lastOptions);
-    } catch {
-      return null;
-    }
+    this.render(this.lastOptions);
   }
 
   /**
@@ -103,24 +99,14 @@ class TransactionsPage {
     }
     this.lastOptions = options;    
 
-//    console.log(options);
     Account.get(options.account_id, (err, res) => {
-//      console.log(err, res);
       if(res && res.data) {
-//        console.log(res);
-        this.renderTitle(res.data.name);
+          this.renderTitle(res.data.name);
       }
     });
 
-    let data = {
-      email: User.current().email,
-      password: User.current().password
-    };
-
-    Transaction.list(data, (err, res) => {
-          //      console.log(err, res);
+    Transaction.list(options, (err, res) => {
       if(res && res.data) {
-          console.log(res);
           this.renderTransactions(res.data);
       }
     });
@@ -164,7 +150,7 @@ class TransactionsPage {
         minute: 'numeric',
     });
 
-    return '${day} в ${time}';
+    return `${day} в ${time}`;
   }
 
   /**
@@ -180,30 +166,30 @@ class TransactionsPage {
     let date = this.formatDate(item.created_at);
 
     let code = 
-     '<div class="transaction transaction_'+type.toLowerCase()+' row">'+
-     '<div class="col-md-7 transaction__details">'+
-     '<div class="transaction__icon">'+
-     '<span class="fa fa-money fa-2x"></span>'+
-     '</div>'+
-     '<div class="transaction__info">'+
-     '<h4 class="transaction__title">'+name+'</h4>'+
-    '<!-- дата -->'+
-    '<div class="transaction__date">'+date+'</div>'+
-    '</div>'+
-    '</div>'+
-    '<div class="col-md-3">'+
-    '<div class="transaction__summ">'+
-    '<!--  сумма -->'+
-    sum+' <span class="currency">₽</span>'+
-    '</div>'+
-    '</div>'+
-    '<div class="col-md-2 transaction__controls">'+
-    '<!-- в data-id нужно поместить id -->'+
-    '<button class="btn btn-danger transaction__remove" data-id='+id+'>'+
-    '<i class="fa fa-trash"></i>'+
-    '</button>'+
-    '</div>'+
-    '</div>';
+`<div class="transaction transaction_${type.toLowerCase()} row">
+<div class="col-md-7 transaction__details">
+<div class="transaction__icon">
+<span class="fa fa-money fa-2x"></span>
+</div>
+<div class="transaction__info">
+<h4 class="transaction__title">${name}</h4>
+<!-- дата -->
+<div class="transaction__date">${date}</div>
+</div>
+</div>
+<div class="col-md-3">
+<div class="transaction__summ">
+<!--  сумма -->
+${sum} <span class="currency">₽</span>
+</div>
+</div>
+<div class="col-md-2 transaction__controls">
+<!-- в data-id нужно поместить id -->
+<button class="btn btn-danger transaction__remove" data-id='+id+'>
+<i class="fa fa-trash"></i>
+</button>
+</div>
+</div>`;
 
     return code;
   }
@@ -214,9 +200,10 @@ class TransactionsPage {
    * */
   renderTransactions(data){
         let cont = this.element.querySelector('.content');
-        cont.innerHTML = '';
+        let html1 = "";
         for (let elem of data) {
-            cont.innerHTML += this.getTransactionHTML(elem);
+          html1 += this.getTransactionHTML(elem);
         }
+        cont.innerHTML = html1;
   }
 }
